@@ -96,6 +96,7 @@ public class Bill  implements Serializable{
 
 	public void setStudentId(Student studentId) {
 		this.studentId = studentId;
+		this.studentId.setBill(this);
 	}
 
 	@Override

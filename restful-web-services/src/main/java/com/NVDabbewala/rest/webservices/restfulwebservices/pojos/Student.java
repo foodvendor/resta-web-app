@@ -129,6 +129,27 @@ public class Student implements Serializable {
 		this.address = address;
 	}
 
+	public List<Bill> getBillList() {
+		return billList;
+	}
+
+	public void setBillList(List<Bill> billList) {
+		this.billList = billList;
+	}
+	
+	public void setBill(Bill bill) {
+		this.billList.add(bill);
+		bill.setStudentId(this);
+	}
+
+	public List<Order> getOrderList() {
+		return orderList;
+	}
+
+	public void setOrderList(List<Order> orderList) {
+		this.orderList = orderList;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(

@@ -1,0 +1,8 @@
+# Ignore all .class files
+*.class
+
+# Ignore all target .java files
+./restful-web-services/target/*
+ 
+ # Ignore bin
+./restful-web-services/bin/

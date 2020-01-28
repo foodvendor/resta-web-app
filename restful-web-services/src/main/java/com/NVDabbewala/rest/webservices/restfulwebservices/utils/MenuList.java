@@ -1,5 +1,7 @@
 package com.NVDabbewala.rest.webservices.restfulwebservices.utils;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
@@ -8,6 +10,7 @@ public enum MenuList {
 	REGULAR(), HALF(4), SPECIAL("Paneer", "Pulao", "Shira","Chinese");
 
 	private int chapati;
+	private SabjiList sabji1=SabjiList.MONDAY;
 	private String sabji;
 	private String rice;
 	private String dal;
@@ -15,15 +18,16 @@ public enum MenuList {
 	private String sweetDish;
 	private String chatani;
 	private String pickle;
-
+	private LocalDate today=LocalDate.now();
 	private MenuList() {
-		this.chapati = 6;
-		this.sabji = "Peas";
+		this.chapati = 6;		
 		this.rice = "Plain";
 		this.dal = "Regular";
 		this.salad = "Normal";
 		this.chatani = "Coconut";
 		this.pickle = "Mango";
+		this.sabji1=sabji1.getTodaysSabji(today.getDayOfWeek().toString());
+		this.sabji = sabji1.getSabji1();
 	}
 
 	private MenuList(int chapati) {
@@ -102,6 +106,15 @@ public enum MenuList {
 
 	public void setSalad(String salad) {
 		this.salad = salad;
+	}
+
+	
+	public SabjiList getSabji1() {
+		return sabji1;
+	}
+
+	public void setSabji1(SabjiList sabji1) {
+		this.sabji1 = sabji1;
 	}
 
 	@Override

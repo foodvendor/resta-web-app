@@ -38,4 +38,8 @@ public class MenuService implements IMenuOperations {
 		newMenu.setSweetDish(menu.getSweetDish());
 		return dao.save(newMenu);
 	}
+	
+//	public Menu showTodayMenu() {
+//		dao.f
+//	}
 }

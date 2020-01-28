@@ -33,4 +33,10 @@ public class MenuController {
 		System.out.println("Inside showMenu "+MenuSelect.getMenu(name));
 		return new ResponseEntity<Menu>(service.addMenu(MenuSelect.getMenu(name)),HttpStatus.OK);
 	}
+	
+	@GetMapping(path = "/today",produces = "application/json")
+	public ResponseEntity<?> showTodayMenu(){
+		System.out.println("Inside showMenu "+MenuSelect.getMenu("REGULAR"));
+		return new ResponseEntity<Enum>(MenuSelect.getMenu("REGULAR"),HttpStatus.OK);
+	}
 }
