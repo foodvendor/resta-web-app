@@ -12,6 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "menu")
 public class Menu implements Serializable {
@@ -40,6 +46,8 @@ public class Menu implements Serializable {
 	@Column
 	private String pickle;
 
+//	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "orderMenuId", orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<Order> orderList;
 

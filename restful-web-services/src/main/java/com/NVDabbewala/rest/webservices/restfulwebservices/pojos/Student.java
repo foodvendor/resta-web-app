@@ -15,6 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "student")
 public class Student implements Serializable {
@@ -41,13 +47,17 @@ public class Student implements Serializable {
 	@Column(name="student_password",length = 30)
 	private String studentPassword;
 	
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cdac_branch_id")
 	private CDACBranch branchId;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "studentId",orphanRemoval = true)
 	private List<Bill> billList;
-	
+		
+//	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "orderStudentId",orphanRemoval = true)
 	private List<Order> orderList;
 	
@@ -129,26 +139,26 @@ public class Student implements Serializable {
 		this.address = address;
 	}
 
-	public List<Bill> getBillList() {
-		return billList;
-	}
-
-	public void setBillList(List<Bill> billList) {
-		this.billList = billList;
-	}
-	
-	public void setBill(Bill bill) {
-		this.billList.add(bill);
-		bill.setStudentId(this);
-	}
-
-	public List<Order> getOrderList() {
-		return orderList;
-	}
-
-	public void setOrderList(List<Order> orderList) {
-		this.orderList = orderList;
-	}
+//	public List<Bill> getBillList() {
+//		return billList;
+//	}
+//
+//	public void setBillList(List<Bill> billList) {
+//		this.billList = billList;
+//	}
+//	
+//	public void setBill(Bill bill) {
+//		this.billList.add(bill);
+//		bill.setStudentId(this);
+//	}
+//
+//	public List<Order> getOrderList() {
+//		return orderList;
+//	}
+//
+//	public void setOrderList(List<Order> orderList) {
+//		this.orderList = orderList;
+//	}
 
 	@Override
 	public String toString() {

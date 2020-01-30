@@ -35,7 +35,7 @@ public class BranchService implements IBranchOperations {
 			System.out.println("Branch is "+temp);
 			Student tempStudent=daoStud.findById(studentId).get();
 			System.out.println("Student is "+tempStudent);
-			temp.setStudents(tempStudent);
+//			temp.setStudents(tempStudent);
 			daoStud.save(tempStudent);
 			return String.format("Student [%s] assigned to branch [%s]",tempStudent.getStudentName(),temp.getBranchName());
 		}

@@ -15,8 +15,13 @@ import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "cdac_branch")
 public class CDACBranch implements Serializable {
@@ -44,11 +49,11 @@ public class CDACBranch implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate courseEnd;
 	
+//its forward part of reference so it will apply on collection type.
+	@JsonManagedReference
 	@OneToMany(mappedBy = "branchId",orphanRemoval = true)
 	private List<Student> studentList; 
 
-	@OneToMany(mappedBy = "orderBranchId",orphanRemoval = true)
-	private List<Order> orderList;
 	
 	public CDACBranch() {
 		System.out.println("Inside  default" + getClass().getName() + " CTOR");
@@ -100,11 +105,11 @@ public class CDACBranch implements Serializable {
 		return studentList;
 	}
 
-
-	public void setStudents(Student student) {
-		this.studentList.add(student);
-		student.setBranchId(this);
-	}
+//
+//	public void setStudents(Student student) {
+//		this.studentList.add(student);
+//		student.setBranchId(this);
+//	}
 
 
 	public List<Student> getStudentList() {
@@ -118,17 +123,6 @@ public class CDACBranch implements Serializable {
 
 	
 	
-
-	public List<Order> getOrderList() {
-		return orderList;
-	}
-
-
-	public void setOrderList(List<Order> orderList) {
-		this.orderList = orderList;
-	}
-
-
 	@Override
 	public String toString() {
 		return String.format("CDACBranch [branchId=%s, branchName=%s, courseStart=%s, courseEnd=%s]", branchId,

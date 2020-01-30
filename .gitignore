@@ -6,3 +6,6 @@
  
  # Ignore bin
 /restful-web-services/bin/
+
+# Ignore classes
+/restful-web-services/target/classes/
