@@ -37,7 +37,7 @@ public class Menu implements Serializable {
 	private String rice;
 	@Column
 	private String dal;
-	@Column(unique = true)
+	@Column
 	private String salad;
 	@Column(name = "sweet_dish", unique = true)
 	private String sweetDish;

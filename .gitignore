@@ -9,3 +9,4 @@
 
 # Ignore classes
 /restful-web-services/target/classes/
+/.metadata/
