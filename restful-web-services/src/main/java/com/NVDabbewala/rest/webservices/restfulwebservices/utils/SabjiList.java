@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum SabjiList {
 
-	MONDAY("Paneer Mutter", "Tomato"), TUESDAY("Gawar", "Bhindi"), WEDNESDAY("Ghevda", "Beans"),
-	THURSDAY("Potato", "Tomato"), FRIDAY("Peas", "Matki"), SATURDAY("Mix Veg", "Fulvar");
+	MONDAY("MutterPaneer", "Tomato"), TUESDAY("Gawar", "Bhindi"), WEDNESDAY("Ghevda", "Beans"),
+	THURSDAY("Potato", "Tomato"), FRIDAY("Peas", "Matki"), SATURDAY("MixVeg", "Fulvar");
 
 	private String sabji1;
 	private String sabji2;
