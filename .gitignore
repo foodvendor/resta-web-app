@@ -4,7 +4,7 @@
 # Ignore all target .java files
 /restful-web-services/target/*
  
- # Ignore bin
+# Ignore bin
 /restful-web-services/bin/
 
 # Ignore classes

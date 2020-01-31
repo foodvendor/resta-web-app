@@ -46,16 +46,17 @@ public class StudentService implements IAuthentication {
 		if (newStudent == null) {
 			return null;
 		} else {
-			Student student = new Student();
-			student.setStudentName("Kaustubh");
-			student.setBranchId(
-					new CDACBranch("DAC", LocalDate.parse("2019-08-12", DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-							LocalDate.parse("2020-02-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-			student.setStudentAge(23);
-			student.setStudentEmail("kaustubh@gmail.com");
-			student.setStudentGender("Male");
-			student.setStudentPassword("kaustubh123");
-			student.setAddress(new Address("Priyadarshini", "Panchawati"));
+//			Student student = new Student();
+//			student.setStudentFirstName("Kaustubh");
+//			student.setStudentLastName("Zagade");
+//			student.setBranchId(
+//					new CDACBranch("DAC", LocalDate.parse("2019-08-12", DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+//							LocalDate.parse("2020-02-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+//			student.setStudentDoB(LocalDate.parse("2020-02-01", DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+//			student.setStudentEmail("kaustubh@gmail.com");
+//			student.setStudentGender("Male");
+//			student.setStudentPassword("kaustubh123");
+//			student.setAddress(new Address("Priyadarshini", "Panchawati"));
 
 			dao.save(newStudent);
 			return "Student registered with ID " + newStudent.getStudentId();

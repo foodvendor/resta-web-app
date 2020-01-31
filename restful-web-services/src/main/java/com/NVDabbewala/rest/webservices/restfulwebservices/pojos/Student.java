@@ -1,6 +1,7 @@
 package com.NVDabbewala.rest.webservices.restfulwebservices.pojos;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -32,20 +35,27 @@ public class Student implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer studentId;
 	
-	@Column(name = "student_name")
-	private String studentName;
+	@Column(name = "first_name")
+	private String studentFirstName;
+	
+	@Column(name = "last_name")
+	private String studentLastName;
 	
 	@Column(name = "student_email",unique = true)
 	private String studentEmail;
 	
-	@Column(name = "student_age")
-	private int studentAge;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "student_dob")
+	private LocalDate studentDoB;
 	
 	@Column(name="student_gender",length = 6)
 	private String studentGender;
 	
 	@Column(name="student_password",length = 30)
 	private String studentPassword;
+	
+	@Column(name="user_role",length = 30)
+	private String userRole="Student";
 	
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -68,15 +78,45 @@ public class Student implements Serializable {
 		System.out.println("Inside default CTOR of "+getClass().getName());
 	}
 
-	public Student(String studentName, String studentEmail, int studentAge, String studentGender,
+	public Student(String studentFirstName,String studentLastName, String studentEmail, LocalDate studentDoB, String studentGender,
 			String studentPassword, Address address) {
 		super();
-		this.studentName = studentName;
+		this.studentFirstName = studentFirstName;
+		this.studentLastName = studentLastName;
 		this.studentEmail = studentEmail;
-		this.studentAge = studentAge;
+		this.studentDoB = studentDoB;
 		this.studentGender = studentGender;
 		this.studentPassword = studentPassword;
 		this.address = address;
+	}
+
+	public Student(String studentFirstName, String studentLastName, String studentEmail, LocalDate studentDoB,
+			String studentGender, String studentPassword, String userRole, Address address) {
+		super();
+		this.studentFirstName = studentFirstName;
+		this.studentLastName = studentLastName;
+		this.studentEmail = studentEmail;
+		this.studentDoB = studentDoB;
+		this.studentGender = studentGender;
+		this.studentPassword = studentPassword;
+		this.userRole = userRole;
+		this.address = address;
+	}
+
+	public String getStudentFirstName() {
+		return studentFirstName;
+	}
+
+	public void setStudentFirstName(String studentFirstName) {
+		this.studentFirstName = studentFirstName;
+	}
+
+	public String getStudentLastName() {
+		return studentLastName;
+	}
+
+	public void setStudentLastName(String studentLastName) {
+		this.studentLastName = studentLastName;
 	}
 
 	public Integer getStudentId() {
@@ -87,13 +127,7 @@ public class Student implements Serializable {
 		this.studentId = studentId;
 	}
 
-	public String getStudentName() {
-		return studentName;
-	}
-
-	public void setStudentName(String studentName) {
-		this.studentName = studentName;
-	}
+	
 
 	public String getStudentEmail() {
 		return studentEmail;
@@ -103,13 +137,7 @@ public class Student implements Serializable {
 		this.studentEmail = studentEmail;
 	}
 
-	public int getStudentAge() {
-		return studentAge;
-	}
 
-	public void setStudentAge(int studentAge) {
-		this.studentAge = studentAge;
-	}
 
 	public String getStudentGender() {
 		return studentGender;
@@ -127,6 +155,14 @@ public class Student implements Serializable {
 		this.studentPassword = studentPassword;
 	}
 
+	public LocalDate getStudentDoB() {
+		return studentDoB;
+	}
+
+	public void setStudentDoB(LocalDate studentDoB) {
+		this.studentDoB = studentDoB;
+	}
+
 	public CDACBranch getBranchId() {
 		return branchId;
 	}
@@ -139,32 +175,20 @@ public class Student implements Serializable {
 		this.address = address;
 	}
 
-//	public List<Bill> getBillList() {
-//		return billList;
-//	}
-//
-//	public void setBillList(List<Bill> billList) {
-//		this.billList = billList;
-//	}
-//	
-//	public void setBill(Bill bill) {
-//		this.billList.add(bill);
-//		bill.setStudentId(this);
-//	}
-//
-//	public List<Order> getOrderList() {
-//		return orderList;
-//	}
-//
-//	public void setOrderList(List<Order> orderList) {
-//		this.orderList = orderList;
-//	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
 
 	@Override
 	public String toString() {
 		return String.format(
-				"Student [studentId=%s, studentName=%s, studentEmail=%s, studentAge=%s, studentGender=%s, studentPassword=%s]",
-				studentId, studentName, studentEmail, studentAge, studentGender, studentPassword);
+				"Student [studentId=%s, studentFirstName=%s, studentFirstName=%s, studentEmail=%s, studentGender=%s, studentPassword=%s]",
+				studentId, studentFirstName,studentLastName, studentEmail, studentGender, studentPassword);
 	}
 	
 	

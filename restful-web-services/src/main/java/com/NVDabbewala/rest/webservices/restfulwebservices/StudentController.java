@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.NVDabbewala.rest.webservices.restfulwebservices.pojos.Student;
 import com.NVDabbewala.rest.webservices.restfulwebservices.specifications.IAuthentication;
+import com.NVDabbewala.rest.webservices.restfulwebservices.utils.ErrorMessage;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -21,9 +22,13 @@ public class StudentController {
 	
 	@PostMapping(path="/register",consumes = "application/json",produces="application/json")
 	public ResponseEntity<?> registerStudent(@RequestBody Student studentRecord){
+		ErrorMessage newMessage=new ErrorMessage();
 		try {
 			String temp=studentService.registerUser(studentRecord);
-			return new ResponseEntity<String>(String.format("Message %s",temp ),HttpStatus.OK);
+			
+			newMessage.setMessageType("Success");
+			newMessage.setMessageDescription(temp);
+			return new ResponseEntity<>(newMessage,HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

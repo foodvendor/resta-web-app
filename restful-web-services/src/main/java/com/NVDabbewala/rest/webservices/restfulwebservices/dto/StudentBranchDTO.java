@@ -4,37 +4,43 @@ import java.time.LocalDate;
 
 public class StudentBranchDTO {
 
-	
-	private String userName;
+	private String userFirstName;
+	private String userLastName;
 	private String userEmail;
-	private Integer userAge;
+	private LocalDate userDoB;
 	private String userGender;
 
-	
-	private String branchName;	
+	private String branchName;
 
 	public StudentBranchDTO() {
 		System.out.println("Inside default CTOR of " + getClass().getName());
 	}
 
-	public StudentBranchDTO(String userName, String userEmail, Integer userAge, String userGender, String branchName) {
+	public StudentBranchDTO(String userFirstName, String userLastName, String userEmail, LocalDate userDoB,
+			String userGender, String branchName) {
 		super();
-		this.userName = userName;
+		this.userFirstName = userFirstName;
+		this.userLastName = userLastName;
 		this.userEmail = userEmail;
-		this.userAge = userAge;
+		this.userDoB = userDoB;
 		this.userGender = userGender;
 		this.branchName = branchName;
 	}
 
-	
-
-
-	public String getUserName() {
-		return userName;
+	public String getUserFirstName() {
+		return userFirstName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
+	}
+
+	public String getUserLastName() {
+		return userLastName;
+	}
+
+	public void setUserLastName(String userLastName) {
+		this.userLastName = userLastName;
 	}
 
 	public String getUserEmail() {
@@ -45,12 +51,13 @@ public class StudentBranchDTO {
 		this.userEmail = userEmail;
 	}
 
-	public Integer getUserAge() {
-		return userAge;
+	
+	public LocalDate getUserAge() {
+		return userDoB;
 	}
 
-	public void setUserAge(Integer userAge) {
-		this.userAge = userAge;
+	public void setUserAge(LocalDate userDoB) {
+		this.userDoB = userDoB;
 	}
 
 	public String getUserGender() {
@@ -61,7 +68,6 @@ public class StudentBranchDTO {
 		this.userGender = userGender;
 	}
 
-
 	public String getBranchName() {
 		return branchName;
 	}
@@ -69,6 +75,5 @@ public class StudentBranchDTO {
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
-
 
 }
