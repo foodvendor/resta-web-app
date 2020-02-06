@@ -1,6 +1,7 @@
 package com.NVDabbewala.rest.webservices.restfulwebservices.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,9 +19,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Entity
+@Entity		//to create table in db
 @Table(name = "menu")
-public class Menu implements Serializable {
+public class Menu implements Serializable     //
+{
 
 	private static final long serialVersionUID = 1L;
 
@@ -47,9 +49,9 @@ public class Menu implements Serializable {
 	private String pickle;
 
 //	@JsonManagedReference
-	@JsonIgnore
+	@JsonIgnore				//bidirection mapping
 	@OneToMany(mappedBy = "orderMenuId", orphanRemoval = true, fetch = FetchType.LAZY)
-	private List<Order> orderList;
+	private List<Order> orderList=new ArrayList<>();
 
 	public Menu(Integer chapati, String sabji, String rice, String dal, String salad, String sweetDish, String chatani,
 			String pickle) {

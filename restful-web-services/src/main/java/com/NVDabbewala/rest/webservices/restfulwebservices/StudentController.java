@@ -13,7 +13,7 @@ import com.NVDabbewala.rest.webservices.restfulwebservices.pojos.Student;
 import com.NVDabbewala.rest.webservices.restfulwebservices.specifications.IAuthentication;
 import com.NVDabbewala.rest.webservices.restfulwebservices.utils.ErrorMessage;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin("http://localhost:4200/")        //
 @RestController
 public class StudentController {
 

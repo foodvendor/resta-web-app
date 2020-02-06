@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -37,8 +38,11 @@ public class Bill  implements Serializable{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate billDate;
 	
-	@Column(name = "payment_status")
-	private boolean paymentStatus;
+//	@Column(name = "payment_status",columnDefinition = "TINYINT", length = 1,nullable = false)
+//	@Column(name = "payment_status",columnDefinition = "BOOLEAN")
+	@Column(columnDefinition = "TINYINT")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean paymentStatus=false;
 
 	@ManyToOne
 	@JoinColumn(name = "student_id")
