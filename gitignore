@@ -1,2 +1,5 @@
-## Ignoring .class
+# Ignoring .class
 *.class
+
+# Ignoring settings file
+/target/
