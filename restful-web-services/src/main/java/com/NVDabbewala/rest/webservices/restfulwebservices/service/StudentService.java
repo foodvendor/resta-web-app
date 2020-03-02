@@ -13,6 +13,7 @@ import com.NVDabbewala.rest.webservices.restfulwebservices.pojos.Address;
 import com.NVDabbewala.rest.webservices.restfulwebservices.pojos.CDACBranch;
 import com.NVDabbewala.rest.webservices.restfulwebservices.pojos.Student;
 import com.NVDabbewala.rest.webservices.restfulwebservices.specifications.IAuthentication;
+import static com.NVDabbewala.rest.webservices.restfulwebservices.utils.PasswordProtect.*;
 
 @Service
 public class StudentService implements IAuthentication {
@@ -36,7 +37,7 @@ public class StudentService implements IAuthentication {
 //		  if(optional.isPresent()) { return optional.get(); }
 //		 
 //		return null;
-		return dao.findStudentByEmailAndPassword(userName, userPassword);
+		return dao.findStudentByEmailAndPassword(userName, encryptPassword(userPassword));
 		
 	}
 
@@ -57,7 +58,7 @@ public class StudentService implements IAuthentication {
 //			student.setStudentGender("Male");
 //			student.setStudentPassword("kaustubh123");
 //			student.setAddress(new Address("Priyadarshini", "Panchawati"));
-
+			newStudent.setStudentPassword(encryptPassword(newStudent.getStudentPassword()));
 			dao.save(newStudent);
 			return "Student registered with ID " + newStudent.getStudentId();
 		}

@@ -51,7 +51,7 @@ public class Student implements Serializable {
 	@Column(name="student_gender",length = 6)
 	private String studentGender;
 	
-	@Column(name="student_password",length = 30)
+	@Column(name="student_password")
 	private String studentPassword;
 	
 	@Column(name="user_role",length = 30)
