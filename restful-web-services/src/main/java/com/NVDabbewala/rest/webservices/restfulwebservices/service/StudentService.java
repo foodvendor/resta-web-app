@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ import com.NVDabbewala.rest.webservices.restfulwebservices.pojos.Address;
 import com.NVDabbewala.rest.webservices.restfulwebservices.pojos.CDACBranch;
 import com.NVDabbewala.rest.webservices.restfulwebservices.pojos.Student;
 import com.NVDabbewala.rest.webservices.restfulwebservices.specifications.IAuthentication;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import static com.NVDabbewala.rest.webservices.restfulwebservices.utils.PasswordProtect.*;
 
 @Service
@@ -37,7 +40,8 @@ public class StudentService implements IAuthentication {
 //		  if(optional.isPresent()) { return optional.get(); }
 //		 
 //		return null;
-		return dao.findStudentByEmailAndPassword(userName, encryptPassword(userPassword));
+		System.out.println("Inside authenticate email="+userName+" Password = "+userPassword);
+		return dao.findStudentByStudentEmailAndStudentPassword(userName, encryptPassword(userPassword));
 		
 	}
 
@@ -46,18 +50,7 @@ public class StudentService implements IAuthentication {
 		// TODO Auto-generated method stub
 		if (newStudent == null) {
 			return null;
-		} else {
-//			Student student = new Student();
-//			student.setStudentFirstName("Kaustubh");
-//			student.setStudentLastName("Zagade");
-//			student.setBranchId(
-//					new CDACBranch("DAC", LocalDate.parse("2019-08-12", DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-//							LocalDate.parse("2020-02-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-//			student.setStudentDoB(LocalDate.parse("2020-02-01", DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-//			student.setStudentEmail("kaustubh@gmail.com");
-//			student.setStudentGender("Male");
-//			student.setStudentPassword("kaustubh123");
-//			student.setAddress(new Address("Priyadarshini", "Panchawati"));
+		} else {						
 			newStudent.setStudentPassword(encryptPassword(newStudent.getStudentPassword()));
 			dao.save(newStudent);
 			return "Student registered with ID " + newStudent.getStudentId();

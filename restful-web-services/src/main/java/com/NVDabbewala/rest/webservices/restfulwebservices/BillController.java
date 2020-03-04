@@ -21,16 +21,16 @@ public class BillController {
 	BillServiceImpl service;
 	
 	@PostMapping(path = "/bill",consumes = "application/json",produces = "application/json")
-	public ResponseEntity<?> calculateBill(@RequestBody Bill bill){
-		System.out.println(bill);
-		double billAmount = service.generateBill(bill.getStudentId().getStudentId());
+	public ResponseEntity<?> calculateBill(@RequestBody Integer studentId){
+//		System.out.println(bill);
+		double billAmount = service.generateBill(studentId);
 		System.out.println(billAmount);
 		if (billAmount > 0) {
 			
 			return new ResponseEntity<Double>(billAmount , HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<String>("Error In generating Bill", HttpStatus.OK);
+			return new ResponseEntity<String>("Error In generating Bill", HttpStatus.NOT_FOUND);
 		}
 	}
 }

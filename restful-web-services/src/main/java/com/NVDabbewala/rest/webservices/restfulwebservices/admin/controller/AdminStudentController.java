@@ -30,10 +30,21 @@ public class AdminStudentController {
 //		List<Student> studentList=dao.findAll();
 		List<StudentBranchDTO> studentList=dao.fetchAllStudentsByBranchId(id);
 		if(studentList.isEmpty()) {
-			return new ResponseEntity<>(new ErrorMessage("Error", "No record found by ID "+id),HttpStatus.OK);
+			return new ResponseEntity<>(new ErrorMessage("Error", "No record found by ID "+id),HttpStatus.NOT_FOUND);
 		}
 		System.out.println("Student list is "+studentList);
 		return new ResponseEntity<>(studentList, HttpStatus.OK);
 //		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/students/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getAllStudents()
+	{
+		List<Student> allStudents=dao.findAll();
+		if(allStudents.isEmpty())
+		{
+			return new ResponseEntity<>(new ErrorMessage("Error", "No record found"),HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(allStudents, HttpStatus.OK);
 	}
 }

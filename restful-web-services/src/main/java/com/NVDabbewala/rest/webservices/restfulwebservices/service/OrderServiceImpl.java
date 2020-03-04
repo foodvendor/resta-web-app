@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.NVDabbewala.rest.webservices.restfulwebservices.dao.IOrderDao;
 import com.NVDabbewala.rest.webservices.restfulwebservices.pojos.Order;
+import com.NVDabbewala.rest.webservices.restfulwebservices.pojos.Student;
 
 @Service
 public class OrderServiceImpl implements IOrderService {
@@ -15,9 +16,11 @@ public class OrderServiceImpl implements IOrderService {
 	IOrderDao dao;
 	
 	@Override
-	public List<Order> getAllOrderByStudentId(int studentId) {
-		System.out.println(dao.getAllOrdersByStudentId(studentId));
+	public List<Order> getAllOrderByStudentId(Integer studentId) {
+		System.out.println("Student deatails are "+studentId);
 		return dao.getAllOrdersByStudentId(studentId);
+//		return null;
+//		return dao.findByOrderStudentId(studentId);
 	}
 
 	@Override

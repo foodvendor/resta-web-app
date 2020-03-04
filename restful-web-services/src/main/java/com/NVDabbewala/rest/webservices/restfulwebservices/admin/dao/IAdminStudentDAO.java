@@ -17,4 +17,5 @@ public interface IAdminStudentDAO extends JpaRepository<Student, Integer> {
 			+ "FROM Student s INNER JOIN s.branchId b WHERE b.branchId= :id")
 	List<StudentBranchDTO> fetchAllStudentsByBranchId(@Param("id") Integer branhId);
 
+	List<Student> findAll();
 }

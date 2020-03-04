@@ -18,9 +18,20 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "orderlist")
+//We have included ToString.Exclude to avoid recursion
 public class Order {
 
 	@Id
@@ -30,11 +41,13 @@ public class Order {
 //	@JsonBackReference
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_student_id")
+	@ToString.Exclude
 	private Student orderStudentId;
 
 //	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_menu_id")
+	@ToString.Exclude
 	private Menu orderMenuId;
 
 
@@ -42,52 +55,5 @@ public class Order {
 	@Column(name = "order_date")
 	private LocalDate orderDate;
 
-	public Order() {
-	}
-
-	public Order(Student orderStudentId, Menu orderMenuId,LocalDate orderDate) {
-		super();
-		this.orderStudentId = orderStudentId;
-		this.orderMenuId = orderMenuId;
-		this.orderDate = orderDate;
-	}
-
-	public Integer getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
-	}
-	
-
-	public LocalDate getOrderDate() {
-		return orderDate;
-	}
-
-	public void setOrderDate(LocalDate orderDate) {
-		this.orderDate = orderDate;
-	}
-
-	public Student getOrderStudentId() {
-		return orderStudentId;
-	}
-
-	public void setOrderStudentId(Student orderStudentId) {
-		this.orderStudentId = orderStudentId;
-	}
-
-	public Menu getOrderMenuId() {
-		return orderMenuId;
-	}
-
-	public void setOrderMenuId(Menu orderMenuId) {
-		this.orderMenuId = orderMenuId;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("Order [orderId=%s, orderDate=%s]", orderId, orderDate);
-	}
 
 }

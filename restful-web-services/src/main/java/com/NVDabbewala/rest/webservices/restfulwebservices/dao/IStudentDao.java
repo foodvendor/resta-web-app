@@ -9,9 +9,11 @@ import com.NVDabbewala.rest.webservices.restfulwebservices.pojos.Student;
 
 @Repository
 public interface IStudentDao extends JpaRepository<Student, Integer> {
-	
-	@Query("select s from Student s where s.studentEmail =:email and s.studentPassword =:password")
-	public Student findStudentByEmailAndPassword(@Param("email")String email,@Param("password")String password);
+
+//	@Query("select s from Student s where s.studentEmail =:email and s.studentPassword =:password")
+//	public Student findStudentByEmailAndPassword(@Param("email")String email,@Param("password")String password);
+
+	Student findStudentByStudentEmailAndStudentPassword(String email, String password);
 //	public boolean updateCDACBranch();
-	
+
 }

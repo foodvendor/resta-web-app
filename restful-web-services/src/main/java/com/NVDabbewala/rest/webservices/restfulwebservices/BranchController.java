@@ -31,8 +31,8 @@ public class BranchController {
 	}
 
 	@PostMapping(path = "/branches/{id}", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<String> setBranch(@PathVariable Integer id, @RequestBody Student student) {
-		int studentId=student.getStudentId();
+	public ResponseEntity<String> setBranch(@PathVariable Integer id, @RequestBody Integer studentId) {
+//		int studentId=student.getStudentId();
 		System.out.printf("\n BranchId [%d],\t StudentId [%d]",id,studentId);
 		String message = branchService.addStudent(studentId, id);
 //		return ResponseEntity.ok().body(message);

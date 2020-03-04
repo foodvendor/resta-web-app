@@ -1,5 +1,6 @@
 package com.NVDabbewala.rest.webservices.restfulwebservices;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +13,14 @@ import com.NVDabbewala.rest.webservices.restfulwebservices.pojos.Student;
 import com.NVDabbewala.rest.webservices.restfulwebservices.specifications.IAuthentication;
 import com.NVDabbewala.rest.webservices.restfulwebservices.utils.ErrorMessage;
 
-@CrossOrigin("http://localhost:4200/") //
+@CrossOrigin("") //
 @RestController
 public class StudentController {
 
 	@Autowired
 	IAuthentication studentService;
 
+	JSONParser parser=null;
 	ErrorMessage errorMessage = null;
 
 	@PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
@@ -36,21 +38,25 @@ public class StudentController {
 			errorMessage.setMessageDescription("Something went wrong");
 			e.printStackTrace();
 		}
-		return new ResponseEntity<String>("Registration failed", HttpStatus.OK);
+		return new ResponseEntity<String>("Registration failed", HttpStatus.BAD_REQUEST);
 	}
 
 	@PostMapping(path = "/authenticate", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> authenticateStudent(@RequestBody Student student) {
 		errorMessage = new ErrorMessage();
 		try {
+//			parser=new JSONParser(student);
 			Student resultStudent = studentService.authenticateUser(student.getStudentEmail(),
 					student.getStudentPassword());
 			if (resultStudent != null)
-				return new ResponseEntity<Student>(resultStudent, HttpStatus.OK);
+				{
+//				HttpStatus.CREATED is an ideal response when new resource is created
+				return new ResponseEntity<>(resultStudent.getUserRole(), HttpStatus.CREATED);
+				}
 			else {
-				errorMessage.setMessageType("Success");
+				errorMessage.setMessageType("Failure");
 				errorMessage.setMessageDescription("Invalid login credentials");
-				return new ResponseEntity<>(errorMessage, HttpStatus.OK);
+				return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
 			}
 
 		} catch (Exception e) {

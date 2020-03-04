@@ -32,9 +32,10 @@ public class OrderController {
 	OrderServiceImpl service;
 	
 	@PostMapping(path = "/getorder", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getAllOrder(@RequestBody Student student){
-		System.out.println(student);
-		List<Order> resultOrder = service.getAllOrderByStudentId(student.getStudentId());
+	public ResponseEntity<?> getAllOrder(@RequestBody Student studentId){
+//		System.out.println(student);
+		List<Order> resultOrder = service.getAllOrderByStudentId(studentId.getStudentId());
+//		List<Order> resultOrder = service.getAllOrderByStudentId(studentId);
 		
 		ListIterator<Order> listIterator=resultOrder.listIterator();
 		while(listIterator.hasNext()){

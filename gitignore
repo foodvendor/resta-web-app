@@ -3,3 +3,6 @@
 
 # Ignoring settings file
 /target/
+
+# Ignoring all target .class files
+/restful-web-services/target/classes/
