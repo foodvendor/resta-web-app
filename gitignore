@@ -5,4 +5,4 @@
 /target/
 
 # Ignoring all target .class files
-/restful-web-services/target/classes/
+restful-web-services/target/classes/
